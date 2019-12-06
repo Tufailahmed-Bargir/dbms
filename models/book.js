@@ -12,5 +12,5 @@ module.exports = (sequelize) => {
     year: Sequelize.INTEGER
   }, { sequelize });
 
-  return Article;
+  return Book;
 }
