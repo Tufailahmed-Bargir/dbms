@@ -2,4 +2,37 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p
+    a.button(href="new-book.pug") Create New Book
+  table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year
+    tbody
+      tr
+        td
+          a(href="book-detail.pug") A Brief History of Time
+        td Stephen Hawking
+        td Non Fiction
+        td 1988
+      tr
+        td
+          a(href="book-detail.pug") Armada
+        td Ernest Cline
+        td Science Fiction
+        td 2015
+      tr
+        td
+          a(href="book-detail.pug") Emma
+        td Jane Austen
+        td Classic
+        td 1815
+      tr
+        td
+          a(href="book-detail.pug") Frankenstein
+        td Mary Shelley
+        td Horror
+        td 1818
