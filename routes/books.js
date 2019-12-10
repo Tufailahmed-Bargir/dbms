@@ -15,12 +15,12 @@ function asyncHandler(cb) {
 
 // home route, redirects to /books
 router.get("/", asyncHandler(async (req, res) => {
-  res.send("respond with a resource");
+  res.render('index', { title: 'Books' });
 }));
 
 // shows the full list of books
 router.get("/books", asyncHandler(async (req, res) => {
-  res.send("respond with a resource");
+  res.render('index', { title: 'Books' });
 }));
 
 // shows the create new book form
