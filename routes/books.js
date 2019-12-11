@@ -31,7 +31,8 @@ router.post("/new", asyncHandler(async (req, res) => {
 
 // shows the book detail form
 router.get("/:id", asyncHandler(async (req, res) => {
-  res.send("respond with a resource");
+  const book = await Book.findByPk(req.params.id);
+  res.render("book-detail", { book: book, title: book.title })
 }));
 
 // updates book info to the database
