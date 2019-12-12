@@ -13,12 +13,12 @@ function asyncHandler(cb) {
   }
 }
 
-// shows the full list of books
+// gets all books
 router.get("/", asyncHandler(async (req, res) => {
   res.render('index', { title: 'Books' });
 }));
 
-// shows the create new book form
+// gets new book form
 router.get("/new", asyncHandler(async (req, res) => {
   res.render("new-book", { book: {}, title: "New Book" });
 }));
@@ -29,13 +29,13 @@ router.post("/new", asyncHandler(async (req, res) => {
   res.redirect("/books/" + book.id);
 }));
 
-// shows the book detail form
+// gets an individual book
 router.get("/:id", asyncHandler(async (req, res) => {
   const book = await Book.findByPk(req.params.id);
   res.render("book-detail", { book: book, title: book.title })
 }));
 
-// updates book info to the database
+// posts an update for an existing book
 router.post("/:id", asyncHandler(async (req, res) => {
   res.send("respond with a resource");
 }));
