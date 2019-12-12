@@ -33,12 +33,14 @@ router.post("/new", asyncHandler(async (req, res) => {
 // gets an individual book
 router.get("/:id", asyncHandler(async (req, res) => {
   const book = await Book.findByPk(req.params.id);
-  res.render("book-detail", { book: book, title: book.title })
+  res.render("update-book", { book: book, title: book.title })
 }));
 
 // posts an update for an existing book
 router.post("/:id", asyncHandler(async (req, res) => {
-  res.send("respond with a resource");
+  const book = await Book.findByPk(req.params.id);
+  await book.update(req.body);
+  res.redirect("/books/" + book.id);
 }));
 
 // deletes a book from the database
