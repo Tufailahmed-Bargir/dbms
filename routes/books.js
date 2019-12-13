@@ -16,12 +16,14 @@ function asyncHandler(cb) {
 // gets all books
 router.get("/", asyncHandler(async (req, res) => {
   const books = await Book.findAll({ order: [[ "title", "ASC" ]]});
-  res.render('index', { books: books, title: 'Books' });
+  res.redirect("/books/page/1");
 }));
 
 // gets first five books
 router.get("/page/:id", asyncHandler(async (req, res) => {
-  const books = await Book.findAll({ order: [[ "title", "ASC" ]], offset: 0, limit: 5 });
+  const index = req.params.id;
+  const offset = (index - 1) * 5;
+  const books = await Book.findAll({ order: [[ "title", "ASC" ]], offset: offset, limit: 5 });
   const pages = await Book.count() / 5;
   res.render('index', { books: books, pages: pages, title: 'Books' });
 }));
