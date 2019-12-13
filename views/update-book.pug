@@ -1,7 +1,13 @@
 extends layout
 
 block content
-  h1= title
+  if book.title
+    h1= title
+  else
+    h1 Update Book
+
+  include errors
+
   form(method="post", action="/books/" + book.id)
     p
       label(for="title") Title
