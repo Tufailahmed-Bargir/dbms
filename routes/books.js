@@ -28,20 +28,34 @@ router.get("/page/:id", asyncHandler(async (req, res) => {
 }));
 
 // gets search results
-router.get("/search", asyncHandler(async (req, res) => {
-  const query = res.query.query;
-  const books = await Book.findAll({ order: [[ "title", "ASC" ]] });
-  res.render("index", { books: books, title: "Search Results" });
-
-  // const query = res.query.query;
-  // console.log(req.query)
-  // const Op = Sequelize.Op
-  // const books = await Book.findAll({
-  //   where: { [Op.contains]: `%${query}%` },
-  //   order: [[ "title", "ASC" ]]
-  // });
-  // console.log(books);
+router.get("/search/", asyncHandler(async (req, res) => {
+  // const query = req.query.query;
+  // const books = await Book.findAll({ order: [[ "title", "ASC" ]] });
   // res.render("index", { books: books, title: "Search Results" });
+
+  const query = req.query.query;
+  console.log(query);
+  const Op = Sequelize.Op;
+  const books = await Book.findAll({
+    where: {
+      [Op.or]: {
+        title: {
+          [Op.like]: `%${query}%`
+        },
+        author: {
+          [Op.like]: `%${query}%`
+        },
+        genre: {
+          [Op.like]: `%${query}%`
+        },
+        first_published: {
+          [Op.like]: `%${query}%`
+        }
+      }
+    },
+    order: [[ "title", "ASC" ]]
+  });
+  res.render("index", { books: books, title: "Search Results" });
 }));
 
 // gets new book form
