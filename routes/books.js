@@ -15,7 +15,6 @@ function asyncHandler(cb) {
 
 // gets all books
 router.get("/", asyncHandler(async (req, res) => {
-  const books = await Book.findAll({ order: [[ "title", "ASC" ]]});
   res.redirect("/books/page/1");
 }));
 
@@ -33,6 +32,16 @@ router.get("/search", asyncHandler(async (req, res) => {
   const query = res.query.query;
   const books = await Book.findAll({ order: [[ "title", "ASC" ]] });
   res.render("index", { books: books, title: "Search Results" });
+
+  // const query = res.query.query;
+  // console.log(req.query)
+  // const Op = Sequelize.Op
+  // const books = await Book.findAll({
+  //   where: { [Op.contains]: `%${query}%` },
+  //   order: [[ "title", "ASC" ]]
+  // });
+  // console.log(books);
+  // res.render("index", { books: books, title: "Search Results" });
 }));
 
 // gets new book form
