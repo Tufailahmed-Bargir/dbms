@@ -33,7 +33,11 @@ router.post("/new", asyncHandler(async (req, res) => {
 // gets an individual book
 router.get("/:id", asyncHandler(async (req, res) => {
   const book = await Book.findByPk(req.params.id);
-  res.render("update-book", { book: book, title: book.title })
+  if (book) {
+    res.render("update-book", { book: book, title: book.title });
+  } else {
+    res.render("book-not-found");
+  }
 }));
 
 // posts an update for an existing book
