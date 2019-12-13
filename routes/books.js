@@ -32,9 +32,7 @@ router.post("/new", asyncHandler(async (req, res) => {
     res.redirect("/books/" + book.id);
   } catch (error) {
     if(error.name === "SequelizeValidationError") {
-      console.log(req.body)
       book = await Book.build(req.body);
-      console.log(book)
       res.render("new-book", { book: book, errors: error.errors, title: "New Book" });
     } else {
       throw error;
@@ -54,9 +52,25 @@ router.get("/:id", asyncHandler(async (req, res) => {
 
 // posts an update for an existing book
 router.post("/:id", asyncHandler(async (req, res) => {
-  const book = await Book.findByPk(req.params.id);
-  await book.update(req.body);
-  res.redirect("/books/" + book.id);
+  let book;
+  try {
+    book = await Book.findByPk(req.params.id);
+    if(book) {
+      await book.update(req.body);
+      res.redirect("/books/" + book.id);
+    } else {
+      res.render("book-not-found");
+    }
+  } catch(error) {
+    if(error.name === "SequelizeValidationError") {
+      book = await Book.build(req.body);
+      book.id = req.params.id;
+      res.render("update-book", { book: book, errors: error.errors, title: book.title });
+    } else {
+      console.log("else")
+      throw error;
+    }
+  }
 }));
 
 // deletes a book from the database
