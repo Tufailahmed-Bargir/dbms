@@ -27,6 +27,7 @@ This project was created as a part of the Treehouse Full Stack JavaScript Techde
 * Add Home button to search page
 * Look for ways to improve error handling
 * improve overall look of the page
+* Deploy application
 
 ## To Run
 
