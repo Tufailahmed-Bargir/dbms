@@ -26,6 +26,7 @@ This project was created as a part of the Treehouse Full Stack JavaScript Techde
 * Add message when no matches are returned
 * Add Home button to search page
 * Look for ways to improve error handling
+* improve overall look of the page
 
 ## To Run
 
