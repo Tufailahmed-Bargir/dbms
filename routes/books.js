@@ -14,7 +14,7 @@ function asyncHandler(cb) {
   }
 }
 
-// gets all books
+// redirects to first page of books list
 router.get("/", asyncHandler(async (req, res) => {
   res.redirect("/books/page/1");
 }));
@@ -22,6 +22,7 @@ router.get("/", asyncHandler(async (req, res) => {
 // gets paginated version of books list based on :id param
 router.get("/page/:id", asyncHandler(async (req, res) => {
   const index = req.params.id;
+  // determines offset based on which page of the books list is shown
   const offset = (index - 1) * 5;
   const books = await Book.findAll({ order: [[ "title", "ASC" ]], offset: offset, limit: 5 });
   const pages = await Book.count() / 5;
