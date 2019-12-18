@@ -26,7 +26,7 @@ router.get("/page/:id", asyncHandler(async (req, res) => {
   const offset = (index - 1) * 5;
   const books = await Book.findAll({ order: [[ "title", "ASC" ]], offset: offset, limit: 5 });
   const pages = await Book.count() / 5;
-  res.render('index', { books: books, pages: pages, title: 'Books' });
+  res.render('index', { books: books, pages: pages, title: `Books Page ${index}` });
 }));
 
 // gets search results
