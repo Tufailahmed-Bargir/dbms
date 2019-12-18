@@ -21,7 +21,6 @@ This project was created as a part of the Treehouse Full Stack JavaScript Techde
 ## Future Improvements
 
 * Improve styling and layout of search input and button
-* Improve styling and layout of pagination buttons
 * Add more detailed code comments
 * Add message when no matches are returned
 * Add Home button to search page
