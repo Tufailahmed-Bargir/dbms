@@ -106,5 +106,6 @@ input[type=text] {
 
 .pagination {
   border: 1px solid #019875;
-  padding: 5px;
+  margin: 5px;
+  padding: 5px 10px;
 }
