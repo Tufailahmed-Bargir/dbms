@@ -25,7 +25,9 @@ router.get("/page/:id", asyncHandler(async (req, res) => {
   // determines offset based on which page of the books list is shown
   const offset = (index - 1) * 5;
   const books = await Book.findAll({ order: [[ "title", "ASC" ]], offset: offset, limit: 5 });
-  const pages = await Book.count() / 5;
+  let pages = await Book.count() / 5;
+  pages = Math.ceil(pages);
+
   res.render('index', { books: books, pages: pages, title: `Books Page ${index}` });
 }));
 
